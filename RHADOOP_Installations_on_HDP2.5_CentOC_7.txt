@@ -1,0 +1,33 @@
+export HADOOP_CMD=/usr/bin/hadoop
+export HADOOP_CONF=/etc/hadoop/conf
+export HADOOP_STREAMING=/usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming-2.7.3.2.5.0.0-1245.jar
+
+sudo echo  "HADOOP_CONF=/etc/hadoop/conf" >> /usr/lib64/R/etc/Renviron
+
+sudo echo "HADOOP_STREAMING=/usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming-2.7.3.2.5.0.0-1245.jar" >> /usr/lib64/R/etc/Renviron
+ 
+
+sudo Rscript -e 'install.packages(c("RJSONIO", "rJava", "plyr", "dplyr", "itertools", "digest", "Rcpp"))'
+ 
+sudo Rscript -e 'install.packages(c("functional","bitops","reshape2"))'
+
+sudo Rscript -e 'install.packages(c("devtools"))'
+ 
+
+ 
+https://github.com/RevolutionAnalytics/RHadoop/wiki/Downloads
+ 
+ Dependency
+ sudo Rscript -e 'install.packages(c("caTools"))'
+ ON R SHELL
+ install.packages("/usr/share/MUKESH/rmr2_3.3.1.tar.gz", repos =NULL, type="source")
+ install.packages("/usr/share/MUKESH/rhdfs_1.0.8.tar.gz", repos =NULL, type="source")
+
+
+R CMD INSTALL RHadoop/rmr2_3.3.1.tar.gz && R CMD INSTALL RHadoop/plyrmr_0.6.0.tar.gz && R CMD INSTALL RHadoop/rhdfs_1.0.8.tar.gz && R CMD INSTALL RHadoop/ravro_1.0.4.tar.gz
+
+
+# Confirm everything is working with a quick smoketest in R:
+library(rhdfs)
+hdfs.init()
+hdfs.ls('/')
